@@ -100,3 +100,11 @@ $routes->get('/lab/tests/delete/(:num)', 'LabController::deleteTest/$1');
 
 
 
+$routes->group('admin', function($routes){
+    // Reports
+    $routes->get('reports', 'Admin\Reports::index');
+    $routes->post('reports/generate', 'Admin\Reports::generate');
+    $routes->get('reports/export/(:segment)/(:segment)/(:segment)', 'Admin\Reports::export/$1/$2/$3'); 
+    // export/{type}/{from}/{to}
+});
+

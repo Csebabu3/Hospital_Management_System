@@ -49,7 +49,7 @@
       <a href="<?= base_url('appointments') ?>"><i class="bi bi-calendar-check"></i>  Appointments</a>
       <a href="<?= base_url('pharmacy') ?>"><i class="bi bi-people"></i>  Pharmacy</a>
       <a href="<?= base_url('lab/technicians') ?>"><i class="bi bi-people"></i>  Laboratory</a>
-      <a href="#"><i class="bi bi-bar-chart"></i> Reports</a>
+      <a href="<?= base_url('admin/reports') ?>"><i class="bi bi-bar-chart"></i> Reports</a>
       <a href="<?= base_url('logout') ?>"><i class="bi bi-box-arrow-right"></i> Logout</a>
     </nav>
 
