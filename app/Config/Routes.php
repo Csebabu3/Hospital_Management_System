@@ -108,3 +108,49 @@ $routes->group('admin', function($routes){
     // export/{type}/{from}/{to}
 });
 
+
+$routes->group('doctor', function($routes){
+    $routes->get('patients', 'Doctor\Patients::index');          
+    $routes->get('patients/view/(:num)', 'Doctor\Patients::view/$1'); 
+    $routes->get('patients/edit/(:num)', 'Doctor\Patients::edit/$1'); 
+    $routes->post('patients/update/(:num)', 'Doctor\Patients::update/$1');
+});
+
+
+$routes->group('doctor', function($routes){
+    $routes->get('appointments', 'Doctor\Appointments::index');            // List appointments
+    $routes->get('appointments/view/(:num)', 'Doctor\Appointments::view/$1');  // View details
+    $routes->get('appointments/edit/(:num)', 'Doctor\Appointments::edit/$1');  // Update status
+    $routes->post('appointments/update/(:num)', 'Doctor\Appointments::update/$1'); // Save update
+});
+
+
+
+$routes->group('doctor', function($routes){
+    $routes->get('prescriptions', 'Doctor\Prescriptions::index');              // List prescriptions
+    $routes->get('prescriptions/create/(:num)', 'Doctor\Prescriptions::create/$1'); // Create new prescription for patient
+    $routes->post('prescriptions/store', 'Doctor\Prescriptions::store');       // Save prescription
+    $routes->get('prescriptions/view/(:num)', 'Doctor\Prescriptions::view/$1');    // View prescription
+    $routes->get('prescriptions/edit/(:num)', 'Doctor\Prescriptions::edit/$1');    // Edit prescription
+    $routes->post('prescriptions/update/(:num)', 'Doctor\Prescriptions::update/$1'); // Update prescription
+});
+
+
+$routes->group('doctor', function($routes) {
+    $routes->get('lab-tests', 'Doctor\LabTests::index');           // List all tests
+    $routes->get('lab-tests/request', 'Doctor\LabTests::request'); // Request new test
+    $routes->post('lab-tests/store', 'Doctor\LabTests::store');    // Save request
+    $routes->get('lab-tests/view/(:num)', 'Doctor\LabTests::view/$1'); // View test result
+    $routes->get('lab-tests/edit/(:num)', 'Doctor\LabTests::edit/$1'); // Update result/remarks
+    $routes->post('lab-tests/update/(:num)', 'Doctor\LabTests::update/$1');
+});
+
+
+
+$routes->group('doctor', function($routes){
+    // Patient communication
+    $routes->get('communications', 'Doctor\Communications::index');            // Inbox / Dashboard
+    $routes->get('communications/send', 'Doctor\Communications::sendForm');    // Compose message
+    $routes->post('communications/send', 'Doctor\Communications::send');       // Submit message
+    $routes->get('communications/view/(:num)', 'Doctor\Communications::view/$1'); // View message
+});
