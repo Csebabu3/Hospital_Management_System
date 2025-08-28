@@ -154,3 +154,98 @@ $routes->group('doctor', function($routes){
     $routes->post('communications/send', 'Doctor\Communications::send');       // Submit message
     $routes->get('communications/view/(:num)', 'Doctor\Communications::view/$1'); // View message
 });
+
+
+$routes->group('patient', function($routes) {
+    $routes->get('appointments', 'Patient\AppointmentController::index');              // List
+    $routes->get('appointments/create', 'Patient\AppointmentController::create');      // Book form
+    $routes->post('appointments/store', 'Patient\AppointmentController::store');       // Save new
+    $routes->get('appointments/edit/(:num)', 'Patient\AppointmentController::edit/$1');// Reschedule form
+    $routes->post('appointments/update/(:num)', 'Patient\AppointmentController::update/$1'); // Update
+    $routes->get('appointments/cancel/(:num)', 'Patient\AppointmentController::cancel/$1');  // Cancel
+});
+
+
+$routes->group('patient', function($routes) {
+    $routes->get('medical-records', 'Patient\MedicalRecordController::index');
+    $routes->get('medical-records/view/(:num)', 'Patient\MedicalRecordController::view/$1');
+    $routes->get('medical-records/edit/(:num)', 'Patient\MedicalRecordController::edit/$1');
+    $routes->post('medical-records/update/(:num)', 'Patient\MedicalRecordController::update/$1');
+    $routes->get('medical-records/download/(:num)', 'Patient\MedicalRecordController::download/$1');
+});
+
+
+$routes->group('patient', function($routes) {
+    $routes->get('billing', 'Patient\BillingController::index');         // list invoices
+    $routes->get('billing/pay/(:num)', 'Patient\BillingController::pay/$1');  // pay invoice
+    $routes->post('billing/process/(:num)', 'Patient\BillingController::process/$1'); // process payment
+    $routes->get('billing/history', 'Patient\BillingController::history'); // payment history
+});
+
+
+$routes->group('patient', function($routes) {
+    $routes->get('profile', 'Patient\ProfileController::index');
+    $routes->post('profile/password', 'Patient\ProfileController::password');
+});
+
+
+$routes->group('patient', function($routes){
+    $routes->get('communication', 'Patient\Communication::index');                   // List all messages
+    $routes->get('communication/view/(:num)', 'Patient\Communication::view/$1');     // View details
+    $routes->match(['get','post'], 'communication/send', 'Patient\Communication::send'); // Send message
+});
+
+$routes->group('receptionist', function($routes) {
+    $routes->get('patient/list', 'Receptionist\PatientController::index');
+    $routes->get('patient/create', 'Receptionist\PatientController::create');
+    $routes->post('patient/store', 'Receptionist\PatientController::store');
+    $routes->get('patient/edit/(:num)', 'Receptionist\PatientController::edit/$1');
+    $routes->post('patient/update/(:num)', 'Receptionist\PatientController::update/$1');
+    $routes->get('patient/delete/(:num)', 'Receptionist\PatientController::delete/$1');
+});
+
+$routes->group('receptionist', function($routes) {
+    // Patient Routes already here...
+    
+    // Appointment Routes
+    $routes->get('appointment/list', 'Receptionist\AppointmentController::index');
+    $routes->get('appointment/create', 'Receptionist\AppointmentController::create');
+    $routes->post('appointment/store', 'Receptionist\AppointmentController::store');
+    $routes->get('appointment/edit/(:num)', 'Receptionist\AppointmentController::edit/$1');
+    $routes->post('appointment/update/(:num)', 'Receptionist\AppointmentController::update/$1');
+    $routes->get('appointment/delete/(:num)', 'Receptionist\AppointmentController::delete/$1');
+    $routes->get('appointment/checkAvailability', 'Receptionist\AppointmentController::checkAvailability');
+});
+
+
+
+$routes->group('receptionist', function($routes) {
+    // Billing Routes
+    $routes->get('billing/list', 'Receptionist\BillingController::index');
+    $routes->get('billing/create', 'Receptionist\BillingController::create');
+    $routes->post('billing/store', 'Receptionist\BillingController::store');
+    $routes->get('billing/edit/(:num)', 'Receptionist\BillingController::edit/$1');
+    $routes->post('billing/update/(:num)', 'Receptionist\BillingController::update/$1');
+    $routes->get('billing/delete/(:num)', 'Receptionist\BillingController::delete/$1');
+    $routes->get('billing/forward/(:num)', 'Receptionist\BillingController::forward/$1');
+});
+
+
+
+$routes->group('receptionist', function($routes) {
+    $routes->get('communication/list', 'Receptionist\CommunicationController::index');
+    $routes->get('communication/create', 'Receptionist\CommunicationController::create');
+    $routes->post('communication/store', 'Receptionist\CommunicationController::store');
+    $routes->get('communication/view/(:num)', 'Receptionist\CommunicationController::view/$1');
+    $routes->get('communication/delete/(:num)', 'Receptionist\CommunicationController::delete/$1');
+});
+
+$routes->group('receptionist', function($routes) {
+    $routes->get('queue/list', 'Receptionist\QueueController::index');
+    $routes->get('queue/create', 'Receptionist\QueueController::create');
+    $routes->post('queue/store', 'Receptionist\QueueController::store');
+    $routes->get('queue/checkin/(:num)', 'Receptionist\QueueController::checkin/$1');
+    $routes->get('queue/checkout/(:num)', 'Receptionist\QueueController::checkout/$1');
+    $routes->get('queue/delete/(:num)', 'Receptionist\QueueController::delete/$1');
+});
+
